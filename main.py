@@ -1,11 +1,12 @@
 import speech_recognition as sr
 
+## add more words here 
 red = ['unresponsive', 'dead', 'death']
 yellow = ['fever', 'child']
 green = ['broken', 'broke']
 
 
-## Improve mapping so
+## Dont touch, we barely made it work
 def mapping(sentence):
     category = ''
 
@@ -16,12 +17,10 @@ def mapping(sentence):
             category = 'red'
             categories.append(category)
         
-            # add text for red what next when amb is coming
         elif word in yellow:
             category = 'yellow'
             categories.append(category)
 
-            # same comment as above
         elif word in green:
             category = 'green'
             categories.append(category)
@@ -40,7 +39,16 @@ def mapping(sentence):
                 category = 'green'
                 return category
         
+# displaying information 
+def display(category):
+    if category == 'red':
+        print("AMB ETA 5 MIN")
 
+    if category == 'yellow':
+        print("ETA 10 MIN")
+    
+    if category == 'green' or category == 'None':
+        print("Connecting to call center... please wait a minute..")
 
 
 def recognize_speech():
@@ -61,7 +69,7 @@ def recognize_speech():
             print("You said:", text)
             # mapping keyword in text
             category = mapping(text)
-            print(category)
+            display(category)
 
         except sr.UnknownValueError:
             print("Could you please repeat that")
@@ -72,4 +80,3 @@ def recognize_speech():
 
 if __name__ == "__main__":
     recognize_speech()
-
